@@ -7,7 +7,21 @@ st.set_page_config(
     layout="wide"
 )
 
+# Ocultar elementos de Streamlit
+st.markdown("""
+<style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    .block-container {
+        padding: 0 !important;
+        max-width: 100% !important;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
-components.html(html_content, height=800, scrolling=True)
+# Mostrar HTML a pantalla completa
+components.html(html_content, height=10000, scrolling=True)
