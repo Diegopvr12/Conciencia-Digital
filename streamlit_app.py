@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 st.set_page_config(
     page_title="Conciencia Digital",
@@ -14,7 +15,6 @@ st.markdown("""
     .block-container {
         padding: 0 !important;
         max-width: 100% !important;
-        margin: 0 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -22,4 +22,4 @@ st.markdown("""
 with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
-st.markdown(html_content, unsafe_allow_html=True)
+components.html(html_content, height=1080, scrolling=True)
