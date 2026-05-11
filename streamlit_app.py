@@ -22,5 +22,4 @@ st.markdown("""
 with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
-# La solución: height=0 y scrolling=True
-components.html(html_content, height=0, scrolling=True)
+components.html(html_content, height=800, scrolling=True)
