@@ -16,10 +16,16 @@ st.markdown("""
         padding: 0 !important;
         max-width: 100% !important;
     }
+    iframe {
+        scrollbar-width: none !important;
+    }
+    iframe::-webkit-scrollbar {
+        display: none !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
 with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
-components.html(html_content, height=800, scrolling=True)
+components.html(html_content, height=8000, scrolling=True)
