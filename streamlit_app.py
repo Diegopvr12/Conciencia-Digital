@@ -8,34 +8,25 @@ st.set_page_config(
     layout="wide"
 )
 
-# 2. Inyección de CSS para limpiar la interfaz de Streamlit
+# 2. CSS para limpiar Streamlit y permitir el scroll principal
 st.markdown("""
     <style>
-        /* Oculta elementos innecesarios de Streamlit */
         #MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
         header {visibility: hidden;}
         
-        /* Elimina márgenes y paddings del contenedor principal */
+        /* Eliminamos espacios en blanco para que el HTML fluya mejor */
         .block-container {
-            padding: 0 !important;
+            padding-top: 0rem !important;
+            padding-bottom: 0rem !important;
+            padding-left: 0rem !important;
+            padding-right: 0rem !important;
             max-width: 100% !important;
-            margin: 0 !important;
         }
 
-        /* Bloquea el scroll de la aplicación Streamlit */
-        .stApp {
-            overflow: hidden;
-            position: fixed;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Estilo para que el iframe ocupe toda la pantalla */
+        /* Quitamos el scroll interno del iframe por si acaso */
         iframe {
-            width: 100vw;
-            height: 100vh;
-            border: none;
+            overflow: hidden;
         }
     </style>
 """, unsafe_allow_html=True)
@@ -45,9 +36,10 @@ try:
     with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
         html_content = file.read()
 except FileNotFoundError:
-    st.error("No se encontró el archivo 'conciencia-digital-v2.html'. Verifica el nombre.")
+    st.error("No se encontró el archivo HTML.")
     st.stop()
 
-# 4. Renderizado del componente
-# Usamos scrolling=True para que el scroll viva DENTRO del iframe
-components.html(html_content, height=2000, scrolling=True)
+# 4. Renderizado
+# 'scrolling=False' elimina la barra del componente.
+# 'height' debe ser igual o mayor al largo de tu diseño para que Streamlit use su propio scroll.
+components.html(html_content, height=8000, scrolling=False)
