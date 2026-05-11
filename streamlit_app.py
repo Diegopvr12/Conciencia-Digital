@@ -16,6 +16,12 @@ st.markdown("""
         padding: 0 !important;
         max-width: 100% !important;
     }
+    html {
+        scrollbar-width: none !important;
+    }
+    body::-webkit-scrollbar {
+        display: none !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
