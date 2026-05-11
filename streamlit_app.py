@@ -16,10 +16,13 @@ st.markdown("""
         padding: 0 !important;
         max-width: 100% !important;
     }
+    section[data-testid="stSidebar"] {
+        display: none !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
 with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
-components.html(html_content, height=1080, scrolling=True)
+components.html(html_content, height=2000, scrolling=True)
