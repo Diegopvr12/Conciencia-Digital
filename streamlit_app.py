@@ -16,16 +16,11 @@ st.markdown("""
         padding: 0 !important;
         max-width: 100% !important;
     }
-    section.main {
-        overflow: visible !important;
-    }
-    .stApp {
-        overflow: auto !important;
-    }
 </style>
 """, unsafe_allow_html=True)
 
 with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
-components.html(html_content, height=10000, scrolling=False)
+# Altura exacta - ajusta este número según necesites
+components.html(html_content, height=7500, scrolling=True)
