@@ -16,16 +16,14 @@ st.markdown("""
         padding: 0 !important;
         max-width: 100% !important;
     }
-    html {
-        scrollbar-width: none !important;
-    }
-    body::-webkit-scrollbar {
-        display: none !important;
-    }
 </style>
 """, unsafe_allow_html=True)
 
 with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
-components.html(html_content, height=800, scrolling=True)
+# Calcular altura exacta basada en el contenido
+lineas = html_content.count('\n')
+altura = lineas * 20
+
+components.html(html_content, height=altura, scrolling=False)
