@@ -15,10 +15,12 @@ st.markdown("""
     .block-container {
         padding: 0 !important;
         max-width: 100% !important;
-        overflow: hidden !important;
     }
     section.main {
-        overflow: hidden !important;
+        overflow: visible !important;
+    }
+    .stApp {
+        overflow: auto !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -26,8 +28,4 @@ st.markdown("""
 with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
-# Calcular altura basada en lineas de contenido
-lines = html_content.count('\n')
-height = lines * 25
-
-components.html(html_content, height=height, scrolling=True)
+components.html(html_content, height=10000, scrolling=False)
