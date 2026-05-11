@@ -7,7 +7,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# Ocultar elementos de Streamlit y ajustar contenedor
 st.markdown("""
 <style>
     #MainMenu {visibility: hidden;}
@@ -16,16 +15,17 @@ st.markdown("""
     .block-container {
         padding: 0 !important;
         max-width: 100% !important;
-        overflow: hidden !important;
-    }
-    section.main {
-        overflow: hidden !important;
-        height: 100vh !important;
     }
 </style>
 """, unsafe_allow_html=True)
 
+# Leer el contenido HTML
 with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
-components.html(html_content, height=1000, scrolling=True)
+# Usar iframe con altura basada en el contenido del HTML
+st.markdown(f"""
+<iframe srcdoc="{html_content.replace('"', '&quot;')}" 
+        style="width: 100%; height: 100vh; border: none; position: fixed; top: 0; left: 0;">
+</iframe>
+""", unsafe_allow_html=True)
