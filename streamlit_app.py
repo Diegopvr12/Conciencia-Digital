@@ -22,5 +22,4 @@ st.markdown("""
 with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
-# Quita el iframe y mejor usa esto:
-st.html(html_content)
+components.html(html_content, height=8000, scrolling=True)
