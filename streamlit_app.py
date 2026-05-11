@@ -7,8 +7,8 @@ st.set_page_config(
     layout="wide"
 )
 
-# Leer el archivo HTML
-with open('index.html', 'r', encoding='utf-8') as file:
+# Leer tu archivo HTML (sin extensión .html)
+with open('conciencia-digital-v2', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
 # Mostrar el HTML
