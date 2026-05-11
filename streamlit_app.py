@@ -26,4 +26,8 @@ st.markdown("""
 with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
-components.html(html_content, height=50000, scrolling=True)
+# Calcular altura basada en lineas de contenido
+lines = html_content.count('\n')
+height = lines * 25
+
+components.html(html_content, height=height, scrolling=True)
