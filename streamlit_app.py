@@ -16,6 +16,10 @@ st.markdown("""
     .block-container {
         padding: 0 !important;
         max-width: 100% !important;
+        overflow: hidden;
+    }
+    .main {
+        overflow: hidden;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -23,5 +27,8 @@ st.markdown("""
 with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
-# Mostrar HTML a pantalla completa
-components.html(html_content, height=10000, scrolling=True)
+# Calcular altura dinámica del contenido
+html_height = html_content.count('\n') * 20
+
+# Mostrar HTML con altura ajustada
+components.html(html_content, height=html_height, scrolling=False)
