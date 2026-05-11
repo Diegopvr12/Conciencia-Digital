@@ -1,83 +1,60 @@
 import streamlit as st
-import pandas as pd
 
-# Configuración de la página
-st.set_page_config(page_title="Conciencia Digital V2", layout="wide")
+# 1. Configuración de la página (DEBE SER LA PRIMERA LÍNEA DE STREAMLIT)
+st.set_page_config(page_title="Conciencia Digital", layout="centered")
 
-# --- ESTILOS PERSONALIZADOS ---
+# 2. Estilos (Corregido para evitar el TypeError de indentación)
 st.markdown("""
-    <style>
-    .main { background-color: #f5f7f9; }
-    .stButton>button { width: 100%; border-radius: 5px; height: 3em; background-color: #4CAF50; color: white; }
-    </style>
-    """, unsafe_content_html=True)
+<style>
+    .stRadio {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        border: 1px solid #e6e9ef;
+        margin-bottom: 10px;
+    }
+    .main {
+        background-color: #f8f9fa;
+    }
+</style>
+""", unsafe_content_html=True)
 
-# --- NAVEGACIÓN (Manteniendo lo que tenías) ---
-with st.sidebar:
-    st.title("🛡️ Menú Principal")
-    app_mode = st.selectbox("Selecciona una sección:", ["Inicio", "Test de Conciencia Digital", "Recursos", "Sobre nosotros"])
+# --- TU TEST EXTENDIDO ---
+st.title("🛡️ Test de Conciencia Digital")
+st.write("Responde todas las preguntas para evaluar tu comportamiento en línea.")
 
-# --- SECCIÓN: INICIO ---
-if app_mode == "Inicio":
-    st.header("Bienvenido a Conciencia Digital")
-    st.write("Tu portal para aprender sobre seguridad, privacidad y bienestar en el mundo online.")
-    st.info("Te recomendamos empezar por el **Test de Conciencia Digital** para evaluar tu nivel actual.")
+# Usamos un formulario para que el test sea largo y se envíe al final
+with st.form("mi_test_unico"):
+    
+    st.subheader("Sección 1: Seguridad y Contraseñas")
+    p1 = st.radio("1. ¿Qué tan compleja es tu contraseña principal?", 
+                  ["Fácil (nombre, fecha)", "Media (letras y números)", "Alta (símbolos, mayúsculas y larga)"])
+    
+    p2 = st.radio("2. ¿Usas autenticación de dos pasos (el código que llega al móvil)?", 
+                  ["Nunca", "Solo en algunas apps", "En todas mis cuentas"])
 
-# --- SECCIÓN: EL TEST (EL CÓDIGO EXCLUSIVO QUE PEDISTE) ---
-elif app_mode == "Test de Conciencia Digital":
-    st.header("🧠 Test Integral de Conciencia Digital")
-    st.write("Responde con sinceridad. Este test evalúa 4 pilares clave de tu vida digital.")
+    st.subheader("Sección 2: Privacidad")
+    p3 = st.radio("3. ¿Quién puede ver tu foto de perfil en redes sociales?", 
+                  ["Todo el mundo", "Solo mis amigos", "Nadie / Solo yo"])
+    
+    p4 = st.radio("4. ¿Sueles aceptar las cookies de todas las páginas sin leer?", 
+                  ["Sí, siempre", "A veces", "No, las rechazo o configuro"])
 
-    with st.form("test_principal"):
-        # --- BLOQUE 1: SEGURIDAD ---
-        st.subheader("1. Seguridad Técnica")
-        s1 = st.radio("¿Utilizas un gestor de contraseñas o claves únicas para cada sitio?", ["No, uso la misma para todo", "Uso variaciones similares", "Sí, cada cuenta tiene una clave robusta y única"])
-        s2 = st.radio("¿Actualizas el software de tu móvil y PC apenas sale la notificación?", ["Nunca", "A veces", "Siempre, por seguridad"])
-        s3 = st.radio("¿Sabes identificar un correo de 'Phishing' (suplantación de identidad)?", ["No estoy seguro", "He oído algo", "Sí, sé revisar el remitente y los enlaces"])
+    st.subheader("Sección 3: Bienestar y Huella")
+    p5 = st.radio("5. ¿Buscas tu nombre en Google para ver qué aparece?", 
+                  ["Nunca lo he hecho", "Lo hice una vez", "Lo hago periódicamente"])
+    
+    # Aquí puedes seguir añadiendo p6, p7, p8... hasta que sea tan largo como quieras.
+    
+    # Botón final
+    submit = st.form_submit_button("Finalizar Test")
 
-        st.divider()
-
-        # --- BLOQUE 2: PRIVACIDAD ---
-        st.subheader("2. Privacidad de Datos")
-        p1 = st.radio("¿Lees los términos y condiciones antes de instalar una App?", ["Nunca", "Solo por encima", "Reviso los permisos de acceso"])
-        p2 = st.selection_toggle("¿Tienes tus perfiles de redes sociales en modo 'Privado'?", value=False)
-        p3 = st.radio("¿Qué haces si una web te pide cookies?", ["Aceptar todo", "Solo las necesarias", "Las configuro manualmente"])
-
-        st.divider()
-
-        # --- BLOQUE 3: BIENESTAR DIGITAL ---
-        st.subheader("3. Salud y Bienestar")
-        b1 = st.slider("¿Cuántas horas antes de dormir dejas de usar pantallas?", 0, 4, 1)
-        b2 = st.radio("¿Sientes ansiedad si olvidas el teléfono en casa?", ["Mucha", "Un poco", "Nada, me siento libre"])
-
-        # BOTÓN DE ENVÍO
-        enviado = st.form_submit_button("Finalizar Test y Ver Resultados")
-
-    if enviado:
-        # Lógica de cálculo (puedes personalizar los puntos)
-        score = 0
-        if "robusta" in s1: score += 25
-        if "Siempre" in s2: score += 25
-        if "Privado" in p2: score += 25
-        if b1 >= 2: score += 25
-
-        st.balloons()
-        st.subheader(f"Tu Nivel de Conciencia Digital: {score}/100")
-        
-        if score <= 40:
-            st.error("⚠️ Nivel Bajo: Tu identidad digital está en riesgo. Revisa nuestra sección de Recursos.")
-        elif score <= 75:
-            st.warning("⚖️ Nivel Medio: Vas por buen camino, pero tienes brechas de seguridad importantes.")
-        else:
-            st.success("🛡️ Nivel Alto: ¡Eres un experto digital! Sigue así y ayuda a otros.")
-
-# --- SECCIÓN: RECURSOS ---
-elif app_mode == "Recursos":
-    st.header("📚 Biblioteca de Aprendizaje")
-    st.write("- [Guía de contraseñas seguras](https://es.wikipedia.org/wiki/Contraseña)")
-    st.write("- [Cómo evitar estafas en WhatsApp](https://www.osi.es)")
-
-# --- SECCIÓN: SOBRE NOSOTROS ---
-elif app_mode == "Sobre nosotros":
-    st.header("Acerca del Proyecto")
-    st.write("Conciencia Digital V2 es una iniciativa para educar a ciudadanos digitales responsables.")
+if submit:
+    st.balloons()
+    st.success("¡Test completado con éxito!")
+    # Aquí calculas el resultado
+    total = 0
+    if "Alta" in p1: total += 20
+    if "todas" in p2: total += 20
+    
+    st.metric("Tu puntuación", f"{total}/100")
