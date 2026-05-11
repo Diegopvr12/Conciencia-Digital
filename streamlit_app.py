@@ -1,37 +1,33 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-# 1. Configuración de la página
 st.set_page_config(
     page_title="Conciencia Digital",
     page_icon="🧠",
     layout="wide"
 )
 
-# 2. CSS para limpiar Streamlit y permitir el scroll principal
+# 1. CSS optimizado: Quitamos el scroll del iframe y ajustamos espacios
 st.markdown("""
     <style>
         #MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
         header {visibility: hidden;}
         
-        /* Eliminamos espacios en blanco para que el HTML fluya mejor */
         .block-container {
-            padding-top: 0rem !important;
-            padding-bottom: 0rem !important;
-            padding-left: 0rem !important;
-            padding-right: 0rem !important;
+            padding: 0 !important;
             max-width: 100% !important;
         }
 
-        /* Quitamos el scroll interno del iframe por si acaso */
+        /* Quitamos el scroll interno del iframe */
         iframe {
             overflow: hidden;
+            display: block;
         }
     </style>
 """, unsafe_allow_html=True)
 
-# 3. Lectura del archivo HTML
+# 2. Carga de tu HTML
 try:
     with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
         html_content = file.read()
@@ -39,7 +35,17 @@ except FileNotFoundError:
     st.error("No se encontró el archivo HTML.")
     st.stop()
 
-# 4. Renderizado
-# 'scrolling=False' elimina la barra del componente.
-# 'height' debe ser igual o mayor al largo de tu diseño para que Streamlit use su propio scroll.
-components.html(html_content, height=8000, scrolling=False)
+# 3. Renderizado del HTML
+# Ajusta el 'height' al tamaño real de tu contenido. 
+# Si tu HTML mide 3000px, pon 3000. No pongas de más para que no sobre espacio.
+components.html(html_content, height=3500, scrolling=False)
+
+# 4. Tu autenticador (o cualquier cosa que vaya al final)
+st.markdown("---") # Una línea divisoria opcional
+with st.container():
+    st.write("### Sección de Autenticación")
+    # Aquí va el código de tu autenticador
+    usuario = st.text_input("Usuario")
+    clave = st.text_input("Contraseña", type="password")
+    if st.button("Ingresar"):
+        st.success("Validando...")
