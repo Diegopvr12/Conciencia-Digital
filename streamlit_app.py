@@ -17,14 +17,7 @@ st.markdown("""
         max-width: 100% !important;
         overflow: hidden !important;
     }
-    .main {
-        overflow: hidden !important;
-    }
     section.main {
-        overflow: hidden !important;
-        height: 100vh !important;
-    }
-    div[data-testid="stVerticalBlock"] {
         overflow: hidden !important;
     }
 </style>
@@ -33,4 +26,4 @@ st.markdown("""
 with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
-components.html(html_content, height=1000, scrolling=True)
+components.html(html_content, height=3000, scrolling=True)
