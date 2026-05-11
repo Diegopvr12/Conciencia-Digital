@@ -22,8 +22,5 @@ st.markdown("""
 with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
-# Calcular altura exacta basada en el contenido
-lineas = html_content.count('\n')
-altura = lineas * 20
-
-components.html(html_content, height=altura, scrolling=False)
+# Quita el iframe y mejor usa esto:
+st.html(html_content)
