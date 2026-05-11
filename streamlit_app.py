@@ -26,4 +26,4 @@ st.markdown("""
 with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
-components.html(html_content, height=8000, scrolling=True)
+components.html(html_content, height=50000, scrolling=True)
