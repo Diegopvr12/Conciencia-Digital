@@ -15,16 +15,6 @@ st.markdown("""
     .block-container {
         padding: 0 !important;
         max-width: 100% !important;
-        overflow: hidden !important;
-        height: 100vh !important;
-    }
-    .main {
-        overflow: hidden !important;
-        height: 100vh !important;
-    }
-    section.main {
-        overflow: hidden !important;
-        height: 100vh !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -32,4 +22,5 @@ st.markdown("""
 with open('conciencia-digital-v2.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 
-components.html(html_content, height=100000, scrolling=True)
+# La solución: height=0 y scrolling=True
+components.html(html_content, height=0, scrolling=True)
